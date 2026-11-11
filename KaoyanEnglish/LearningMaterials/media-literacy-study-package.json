@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "package_id": "a272aa1d-7a52-4855-88ad-1302b376c812",
+  "created_at": "2026-11-10T04:50:05Z",
+  "sources": [
+    {
+      "id": "a1f19111-34c7-424f-b91b-9519791ea680",
+      "title": "用户提供的社交媒体截图",
+      "note": "涉及真实人物的个人指控未经独立核实，仅用于英语学习。"
+    }
+  ],
+  "articles": [
+    {
+      "id": "05fd9d62-e391-432e-9690-7b978c8e5ab8",
+      "title": "Social Media Reports and Unverified Allegations",
+      "kind": "original",
+      "source_id": "a1f19111-34c7-424f-b91b-9519791ea680",
+      "theme": "媒体与信息传播",
+      "body": "Huang admitted to marital infidelity in a company-wide email, apologizing to his family and employees. Reports linked the controversy to Alice Huang, a former executive at Singapore-based Megaspeed, whom U.S. intelligence officials reportedly suspected of having Chinese intelligence connections. The allegations remain unproven.\n\nAs edited photos, AI comparisons, and memes spread across X, NVIDIA's board has launched an independent investigation. The company says it has no evidence that sensitive information was compromised and continues to support Huang's leadership."
+    },
+    {
+      "id": "c15ebdf0-9fa2-4c1d-85a0-62030206607b",
+      "title": "Unverified Claims in the Digital Age",
+      "kind": "adapted",
+      "source_id": "a1f19111-34c7-424f-b91b-9519791ea680",
+      "original_article_id": "05fd9d62-e391-432e-9690-7b978c8e5ab8",
+      "theme": "媒体与信息传播",
+      "body": "Social media allows information to spread at extraordinary speed, but speed does not guarantee accuracy. An online post may combine confirmed facts, second-hand reports and unproven allegations. When these elements are presented together, readers may find it difficult to distinguish evidence from speculation.\n\nImages can further complicate the situation. Edited photographs, AI-generated content and humorous memes often travel farther than careful explanations. As a result, the popularity of a claim should not be mistaken for proof of its truth.\n\nResponsible readers should examine the source, look for independent reporting and pay attention to uncertainty. Waiting for reliable evidence is not a sign of indifference. Rather, it reflects a willingness to make judgments fairly and avoid amplifying claims that remain unverified."
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "95d40165-3809-4f4d-9345-9d959e24cf54",
+      "expression": "allegation",
+      "meaning": "指控；未经证实的说法",
+      "source_article_ids": [
+        "05fd9d62-e391-432e-9690-7b978c8e5ab8",
+        "c15ebdf0-9fa2-4c1d-85a0-62030206607b"
+      ],
+      "original_sentence": "The allegations remain unproven.",
+      "sentence_translation": "这些指控尚未得到证实。",
+      "difficulty": 4,
+      "topics": [
+        "媒体与信息传播"
+      ],
+      "collocations": [
+        "make an allegation",
+        "unproven allegations"
+      ],
+      "phonetic": "/ˌælɪˈɡeɪʃən/",
+      "english_definition": "a claim that someone has done something wrong, especially one that has not been proven"
+    },
+    {
+      "id": "39560fe5-4fb5-4f19-b905-c140c472302f",
+      "expression": "compromise",
+      "meaning": "危及；损害（安全或完整性）",
+      "source_article_ids": [
+        "05fd9d62-e391-432e-9690-7b978c8e5ab8"
+      ],
+      "original_sentence": "The company says it has no evidence that sensitive information was compromised.",
+      "sentence_translation": "该公司称没有证据表明敏感信息受到损害。",
+      "difficulty": 4,
+      "topics": [
+        "媒体与信息传播"
+      ],
+      "uncommon_meaning": "熟词僻义：除“妥协”外，还可表示危及、损害安全。",
+      "phonetic": "/ˈkɒmprəmaɪz/",
+      "english_definition": "to put something, especially security or safety, at risk"
+    },
+    {
+      "id": "1a590ff2-3a82-4945-b1a7-9caa0987ac2b",
+      "expression": "distinguish A from B",
+      "meaning": "区分 A 和 B",
+      "source_article_ids": [
+        "c15ebdf0-9fa2-4c1d-85a0-62030206607b"
+      ],
+      "original_sentence": "Readers may find it difficult to distinguish evidence from speculation.",
+      "sentence_translation": "读者可能发现难以区分证据与推测。",
+      "difficulty": 3,
+      "topics": [
+        "媒体与信息传播"
+      ],
+      "phonetic": "/dɪˈstɪŋɡwɪʃ/",
+      "english_definition": "to recognize or describe the difference between A and B"
+    }
+  ],
+  "questions": [
+    {
+      "id": "4478be02-4bcd-499a-b168-5e87fff15b2f",
+      "article_id": "c15ebdf0-9fa2-4c1d-85a0-62030206607b",
+      "type": "reading_single_choice",
+      "provenance": "original_simulation",
+      "stem": "What does the author suggest readers do when encountering online claims?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Accept claims that are widely shared."
+        },
+        {
+          "id": "B",
+          "text": "Examine sources and wait for reliable evidence."
+        },
+        {
+          "id": "C",
+          "text": "Ignore all information on social media."
+        },
+        {
+          "id": "D",
+          "text": "Rely on edited images to confirm the facts."
+        }
+      ],
+      "correct_answer": "B",
+      "explanation": "文章末段建议核查来源、寻找独立报道并等待可靠证据，因此选 B。",
+      "evidence": "Responsible readers should examine the source, look for independent reporting and pay attention to uncertainty.",
+      "distractor_analysis": {
+        "A": "传播广泛不等于真实。",
+        "C": "文章主张审慎核查，而非忽视所有信息。",
+        "D": "编辑过的图像可能造成混淆。"
+      },
+      "tested_skill": "细节理解与同义替换",
+      "difficulty": 3
+    }
+  ],
+  "writing_expressions": [
+    {
+      "id": "c1401ed8-9f77-4c9c-94e1-7496c0ac2912",
+      "expression": "should not be mistaken for",
+      "meaning": "不应被误认为",
+      "source_article_ids": [
+        "c15ebdf0-9fa2-4c1d-85a0-62030206607b"
+      ],
+      "topics": [
+        "媒体与信息传播",
+        "教育与人才培养"
+      ],
+      "expression_type": "辨析与论证",
+      "original_sentence": "The popularity of a claim should not be mistaken for proof of its truth.",
+      "essay_sentence": "Access to information should not be mistaken for the ability to evaluate it critically.",
+      "translation": "获取信息不应被误认为具备批判性评估信息的能力。",
+      "alternatives": [
+        "should not be confused with"
+      ]
+    }
+  ]
+}

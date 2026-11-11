@@ -1,0 +1,326 @@
+{
+  "schema_version": "1.0",
+  "package_id": "38b9f93f-3bda-495c-938a-52445803a403",
+  "created_at": "2026-11-10T05:02:44Z",
+  "sources": [
+    {
+      "id": "39f20d05-9c80-4945-a721-c6acd39abba0",
+      "title": "用户提供的社交媒体截图：Neuralink 与动物交流",
+      "note": "原帖列出 Reuters、Scientific American、MIT Technology Review 和 Earth Species Project，但未给出具体文章链接；本资料未独立核实原帖中的科技说法。"
+    },
+    {
+      "id": "22ff94e1-9ded-48d1-9591-1ad2bf3b993b",
+      "title": "用户提供的社交媒体截图：可变形机器人",
+      "note": "原帖提到 Science Advances，但未提供论文链接；本资料未独立核实具体研究与机构信息。"
+    }
+  ],
+  "articles": [
+    {
+      "id": "fccee3c6-abe1-4176-a829-d67958dca508",
+      "title": "Neuralink and Animal Communication",
+      "kind": "original",
+      "source_id": "39f20d05-9c80-4945-a721-c6acd39abba0",
+      "theme": "科技与人工智能",
+      "body": "Elon Musk’s Neuralink could one day help humans communicate with animals, as advances in brain implants and artificial intelligence open new possibilities for understanding other species.\n\nNeuralink already allows people with paralysis to control computers using brain signals, while separate research projects like Project CETI and Earth Species Project use AI to study communication among whales, elephants, and other animals. Scientists are identifying patterns in animal sounds, but translating thoughts remains unproven.\n\nAlthough 2028 has circulated as a possible timeline, Neuralink has not confirmed any plans or release date for animal communication technology. Researchers still face major challenges in understanding what animals actually think and express."
+    },
+    {
+      "id": "fc7c77d8-526f-4e8d-85d9-0c17f829fe43",
+      "title": "A Shape-Shifting Liquid Robot",
+      "kind": "original",
+      "source_id": "22ff94e1-9ded-48d1-9591-1ad2bf3b993b",
+      "theme": "科技与人工智能",
+      "body": "Scientists in South Korea have developed a shape-shifting liquid robot that looks like something straight out of Terminator 2.\n\nCreated by researchers at Seoul National University and Gachon University, the robot uses liquid metal mixed with magnetic particles to switch between flexible and rigid states.\n\nWhen exposed to a magnetic field, the particles organize into a temporary structure that helps the material hold its shape and withstand pressure. Remove the magnetic field, and it becomes soft and fluid again.\n\nDuring laboratory experiments, the robot demonstrated its ability to squeeze through tight spaces before regaining its strength and structure. Unlike conventional robots built with mechanical joints, this technology relies on magnetic control and the unique properties of its materials.\n\nPublished in Science Advances, the research could open new possibilities for medical robotics, search-and-rescue operations, and exploring environments that traditional machines cannot easily access."
+    },
+    {
+      "id": "c31683d9-bb1c-4247-b3ca-d5ea95b75da9",
+      "title": "Understanding Animal Communication in the Age of AI",
+      "kind": "adapted",
+      "source_id": "39f20d05-9c80-4945-a721-c6acd39abba0",
+      "original_article_id": "fccee3c6-abe1-4176-a829-d67958dca508",
+      "theme": "科技与人工智能",
+      "body": "Artificial intelligence is giving researchers new tools to study how animals communicate. By examining large collections of sounds, scientists can identify recurring patterns that might otherwise escape human attention. Such patterns, however, do not automatically reveal what an animal is thinking.\n\nBrain-computer interfaces are developing along a separate path. Some systems help people with paralysis interact with computers, but applying these technologies to communication between humans and other species presents different challenges. Researchers must first establish how signals relate to behaviour and context.\n\nSpeculation about when interspecies conversations might become possible should therefore be treated with caution. Progress depends on careful experiments and reliable evidence, not simply on the availability of powerful technology."
+    },
+    {
+      "id": "ffa00997-54a4-4a6e-a804-7a994412851d",
+      "title": "Flexible Materials and the Future of Robotics",
+      "kind": "adapted",
+      "source_id": "22ff94e1-9ded-48d1-9591-1ad2bf3b993b",
+      "original_article_id": "fc7c77d8-526f-4e8d-85d9-0c17f829fe43",
+      "theme": "科技与人工智能",
+      "body": "Robots are often imagined as machines made of rigid parts. Yet researchers are exploring materials that can change their physical properties in response to external conditions. These materials may eventually allow machines to adapt to environments that ordinary robots find difficult to enter.\n\nOne approach combines a flexible material with particles that respond to a magnetic field. Under suitable conditions, the field can help the material hold its shape; without it, the material may become more fluid. This combination could allow a device to pass through a narrow opening and then regain a useful structure.\n\nPotential applications range from medical devices to search-and-rescue equipment. However, promising laboratory demonstrations do not automatically become practical products. Researchers still need to evaluate control, safety and performance in real-world conditions."
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "c20f80be-13d1-4458-8a12-52c088540719",
+      "expression": "implant",
+      "phonetic": "/ˈɪmplɑːnt/",
+      "meaning": "植入物；植入",
+      "english_definition": "an object placed inside the body, or to place such an object there",
+      "source_article_ids": [
+        "fccee3c6-abe1-4176-a829-d67958dca508"
+      ],
+      "original_sentence": "Advances in brain implants and artificial intelligence open new possibilities for understanding other species.",
+      "sentence_translation": "脑植入技术与人工智能的进步为理解其他物种带来了新的可能。",
+      "difficulty": 4,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "brain implant",
+        "implant a device"
+      ]
+    },
+    {
+      "id": "b4ca29a7-299a-42eb-b330-fdffd0301c0f",
+      "expression": "paralysis",
+      "phonetic": "/pəˈræləsɪs/",
+      "meaning": "瘫痪；麻痹",
+      "english_definition": "the loss of the ability to move or feel part or all of the body",
+      "source_article_ids": [
+        "fccee3c6-abe1-4176-a829-d67958dca508"
+      ],
+      "original_sentence": "Neuralink already allows people with paralysis to control computers using brain signals.",
+      "sentence_translation": "原帖称，Neuralink 已能让瘫痪人士通过脑信号控制电脑。",
+      "difficulty": 4,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "people with paralysis"
+      ]
+    },
+    {
+      "id": "d6fd8940-efb4-4f35-8fa2-1af971031813",
+      "expression": "identify",
+      "phonetic": "/aɪˈdentɪfaɪ/",
+      "meaning": "识别；发现",
+      "english_definition": "to recognize or discover what something is",
+      "source_article_ids": [
+        "fccee3c6-abe1-4176-a829-d67958dca508"
+      ],
+      "original_sentence": "Scientists are identifying patterns in animal sounds.",
+      "sentence_translation": "科学家正在识别动物声音中的规律。",
+      "difficulty": 3,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "identify patterns",
+        "identify a problem"
+      ]
+    },
+    {
+      "id": "217659d1-4c92-4775-bdf0-c0cb4a4d6a3f",
+      "expression": "unproven",
+      "phonetic": "/ˌʌnˈpruːvən/",
+      "meaning": "未经证实的",
+      "english_definition": "not established as true by sufficient evidence",
+      "source_article_ids": [
+        "fccee3c6-abe1-4176-a829-d67958dca508"
+      ],
+      "original_sentence": "Translating thoughts remains unproven.",
+      "sentence_translation": "翻译思想的能力仍未经证实。",
+      "difficulty": 4,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "remain unproven",
+        "an unproven claim"
+      ]
+    },
+    {
+      "id": "1e8598d1-d40c-4284-a9ac-9389d4040831",
+      "expression": "flexible",
+      "phonetic": "/ˈfleksəbəl/",
+      "meaning": "柔软的；灵活的",
+      "english_definition": "able to bend or change easily without breaking",
+      "source_article_ids": [
+        "fc7c77d8-526f-4e8d-85d9-0c17f829fe43"
+      ],
+      "original_sentence": "The robot uses liquid metal mixed with magnetic particles to switch between flexible and rigid states.",
+      "sentence_translation": "该机器人使用混合磁性颗粒的液态金属，在柔软与坚硬的状态之间切换。",
+      "difficulty": 3,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "flexible materials",
+        "a flexible approach"
+      ]
+    },
+    {
+      "id": "5c5ac89e-264a-4491-861e-07ec488cd69a",
+      "expression": "rigid",
+      "phonetic": "/ˈrɪdʒɪd/",
+      "meaning": "坚硬的；僵硬的",
+      "english_definition": "stiff and not easily bent or changed",
+      "source_article_ids": [
+        "fc7c77d8-526f-4e8d-85d9-0c17f829fe43"
+      ],
+      "original_sentence": "The robot uses liquid metal mixed with magnetic particles to switch between flexible and rigid states.",
+      "sentence_translation": "该机器人使用混合磁性颗粒的液态金属，在柔软与坚硬的状态之间切换。",
+      "difficulty": 4,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "rigid structure",
+        "rigid rules"
+      ]
+    },
+    {
+      "id": "cbca3997-ef35-4343-ad69-39dae39eb424",
+      "expression": "withstand",
+      "phonetic": "/wɪðˈstænd/",
+      "meaning": "承受；经受住",
+      "english_definition": "to remain unharmed or effective despite pressure, force, or difficulty",
+      "source_article_ids": [
+        "fc7c77d8-526f-4e8d-85d9-0c17f829fe43"
+      ],
+      "original_sentence": "The particles organize into a temporary structure that helps the material hold its shape and withstand pressure.",
+      "sentence_translation": "颗粒形成临时结构，帮助材料保持形状并承受压力。",
+      "difficulty": 4,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "withstand pressure",
+        "withstand stress"
+      ]
+    },
+    {
+      "id": "03fffd19-8da2-44b7-b5a8-7036e244c0af",
+      "expression": "regain",
+      "phonetic": "/rɪˈɡeɪn/",
+      "meaning": "重新获得；恢复",
+      "english_definition": "to get back an ability, quality, or state that was lost",
+      "source_article_ids": [
+        "fc7c77d8-526f-4e8d-85d9-0c17f829fe43"
+      ],
+      "original_sentence": "The robot demonstrated its ability to squeeze through tight spaces before regaining its strength and structure.",
+      "sentence_translation": "机器人展示了穿过狭窄空间后恢复强度和结构的能力。",
+      "difficulty": 3,
+      "topics": [
+        "科技与人工智能"
+      ],
+      "collocations": [
+        "regain strength",
+        "regain control"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "733a69b7-4cb0-48de-a5fc-9f84b6e833b8",
+      "article_id": "c31683d9-bb1c-4247-b3ca-d5ea95b75da9",
+      "type": "reading_single_choice",
+      "provenance": "original_simulation",
+      "stem": "What can be inferred about identifying patterns in animal sounds?",
+      "options": [
+        {
+          "id": "A",
+          "text": "It proves that scientists can translate animal thoughts."
+        },
+        {
+          "id": "B",
+          "text": "It may assist research, but does not by itself reveal animal thoughts."
+        },
+        {
+          "id": "C",
+          "text": "It makes careful experiments unnecessary."
+        },
+        {
+          "id": "D",
+          "text": "It guarantees human-animal conversations by 2028."
+        }
+      ],
+      "correct_answer": "B",
+      "explanation": "文章指出，人工智能识别声音规律有助于研究，但规律本身并不能直接揭示动物的思想。",
+      "evidence": "Such patterns, however, do not automatically reveal what an animal is thinking.",
+      "distractor_analysis": {
+        "A": "将发现规律等同于读懂思想，扩大了结论。",
+        "C": "文章强调仍需仔细实验。",
+        "D": "文章对具体实现时间持谨慎态度。"
+      },
+      "tested_skill": "细节理解与推断",
+      "difficulty": 3
+    },
+    {
+      "id": "da54fcde-7951-4915-bd0a-9ddea355dc8c",
+      "article_id": "ffa00997-54a4-4a6e-a804-7a994412851d",
+      "type": "reading_single_choice",
+      "provenance": "original_simulation",
+      "stem": "According to the passage, why might flexible materials be useful in robotics?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They eliminate the need for safety testing."
+        },
+        {
+          "id": "B",
+          "text": "They guarantee that prototypes become commercial products."
+        },
+        {
+          "id": "C",
+          "text": "They may help devices enter narrow or difficult spaces."
+        },
+        {
+          "id": "D",
+          "text": "They make magnetic fields unnecessary in every design."
+        }
+      ],
+      "correct_answer": "C",
+      "explanation": "文章说明可变形材料可能帮助设备通过狭窄开口、进入传统机器人难以进入的环境。",
+      "evidence": "This combination could allow a device to pass through a narrow opening and then regain a useful structure.",
+      "distractor_analysis": {
+        "A": "文章明确指出还需要评估安全性。",
+        "B": "实验室成果不自动变成实用产品。",
+        "D": "文中介绍的方案依赖磁场。"
+      },
+      "tested_skill": "细节理解与推断",
+      "difficulty": 3
+    }
+  ],
+  "writing_expressions": [
+    {
+      "id": "d0d35e5c-6927-4a7e-a9d3-b986672ee8b4",
+      "expression": "open new possibilities for",
+      "meaning": "为……开辟新的可能性",
+      "source_article_ids": [
+        "fccee3c6-abe1-4176-a829-d67958dca508"
+      ],
+      "topics": [
+        "科技与人工智能",
+        "环境保护与可持续发展"
+      ],
+      "expression_type": "论证科技发展",
+      "context": "讨论技术的作用及其实际应用。",
+      "original_sentence": "Advances in brain implants and artificial intelligence open new possibilities for understanding other species.",
+      "essay_sentence": "Advances in clean energy open new possibilities for sustainable development.",
+      "translation": "清洁能源的进步为可持续发展开辟了新的可能性。",
+      "alternatives": [],
+      "usage_notes": "结合具体语境说明原因或条件，避免空泛表述。"
+    },
+    {
+      "id": "8aa68dbc-5573-49b8-a4f7-817d6288b1d8",
+      "expression": "in response to",
+      "meaning": "作为对……的反应；响应",
+      "source_article_ids": [
+        "ffa00997-54a4-4a6e-a804-7a994412851d"
+      ],
+      "topics": [
+        "科技与人工智能",
+        "教育与人才培养"
+      ],
+      "expression_type": "论证科技发展",
+      "context": "讨论技术的作用及其实际应用。",
+      "original_sentence": "Researchers are exploring materials that can change their physical properties in response to external conditions.",
+      "essay_sentence": "Universities should adapt their teaching methods in response to technological change.",
+      "translation": "大学应当针对技术变化调整教学方法。",
+      "alternatives": [],
+      "usage_notes": "结合具体语境说明原因或条件，避免空泛表述。"
+    }
+  ]
+}

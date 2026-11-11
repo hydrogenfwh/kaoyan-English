@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "package_id": "10000000-0000-4000-8000-000000000100",
+  "created_at": "2026-11-10T00:00:00Z",
+  "sources": [
+    {
+      "id": "10000000-0000-4000-8000-000000000001",
+      "title": "示例学习资料：Technology and Learning",
+      "note": "离线演示用原创短文；非历年真题。"
+    }
+  ],
+  "articles": [
+    {
+      "id": "10000000-0000-4000-8000-000000000002",
+      "title": "Technology and Learning — Original",
+      "body": "Digital tools can facilitate learning by making information more accessible. Yet access alone does not guarantee understanding. Students still need to evaluate evidence and reflect on what they read. Technology is most useful when it supports, rather than replaces, independent thought.",
+      "kind": "original",
+      "source_id": "10000000-0000-4000-8000-000000000001",
+      "theme": "科技与人工智能",
+      "created_at": "2026-11-10T00:00:00Z"
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000003",
+      "title": "Beyond Access: Learning in a Digital Age",
+      "body": "The rapid spread of digital tools has made information easier to obtain. Advocates argue that these tools can facilitate learning and reduce barriers to education. However, access to information should not be confused with a deeper understanding of it.\n\nA student may collect hundreds of articles without carefully considering a single argument. Effective learning therefore calls for more than efficient searching. It requires learners to assess evidence, compare perspectives and question their own assumptions.\n\nDigital technology can play a vital role in this process when it encourages reflection. Its educational value depends less on the volume of material it delivers than on the quality of thought it helps to develop. Learning outcomes reflect the quality of thought.",
+      "kind": "adapted",
+      "source_id": "10000000-0000-4000-8000-000000000001",
+      "original_article_id": "10000000-0000-4000-8000-000000000002",
+      "theme": "教育与人才培养",
+      "created_at": "2026-11-10T00:00:00Z"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "10000000-0000-4000-8000-000000000004",
+      "expression": "facilitate",
+      "phonetic": "/fəˈsɪlɪteɪt/",
+      "meaning": "促进；使便利",
+      "original_sentence": "These tools can facilitate learning and reduce barriers to education.",
+      "sentence_translation": "这些工具能够促进学习并降低教育门槛。",
+      "collocations": [
+        "facilitate learning",
+        "facilitate communication"
+      ],
+      "uncommon_meaning": "指使某个过程更容易进行，而非直接完成该过程。",
+      "difficulty": 3,
+      "topics": [
+        "科技与人工智能",
+        "教育与人才培养"
+      ],
+      "writing_value": "可用于论述技术、政策或合作的积极作用。",
+      "source_article_ids": [
+        "10000000-0000-4000-8000-000000000002",
+        "10000000-0000-4000-8000-000000000003"
+      ],
+      "created_at": "2026-11-10T00:00:00Z",
+      "updated_at": "2026-11-10T00:00:00Z"
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000005",
+      "expression": "reflect",
+      "meaning": "认真思考；反思",
+      "source_article_ids": [
+        "10000000-0000-4000-8000-000000000002"
+      ],
+      "original_sentence": "Students still need to evaluate evidence and reflect on what they read.",
+      "sentence_translation": "学生仍需评估证据并反思阅读内容。",
+      "difficulty": 3,
+      "topics": [
+        "教育与人才培养"
+      ]
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000006",
+      "expression": "reflect",
+      "meaning": "反映；显示",
+      "source_article_ids": [
+        "10000000-0000-4000-8000-000000000003"
+      ],
+      "original_sentence": "Learning outcomes reflect the quality of thought.",
+      "sentence_translation": "学习成果反映思维的质量。",
+      "difficulty": 2,
+      "topics": [
+        "教育与人才培养"
+      ],
+      "writing_value": "可用于说明结果反映某种内在质量。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "10000000-0000-4000-8000-000000000007",
+      "article_id": "10000000-0000-4000-8000-000000000003",
+      "type": "reading_single_choice",
+      "provenance": "original_simulation",
+      "stem": "According to the passage, the educational value of digital technology mainly depends on its ability to _____.",
+      "options": [
+        {
+          "id": "A",
+          "text": "deliver the largest possible amount of information"
+        },
+        {
+          "id": "B",
+          "text": "replace learners’ independent judgment"
+        },
+        {
+          "id": "C",
+          "text": "promote thoughtful engagement with information"
+        },
+        {
+          "id": "D",
+          "text": "remove the need to compare different perspectives"
+        }
+      ],
+      "correct_answer": "C",
+      "explanation": "文章末段强调技术的教育价值取决于它能培养的思考质量，因此 C 正确。",
+      "evidence": "Its educational value depends less on the volume of material it delivers than on the quality of thought it helps to develop.",
+      "distractor_analysis": {
+        "A": "与末段对信息量和思考质量的比较相反。",
+        "B": "原文强调独立思考，并非取代判断。",
+        "D": "第二段明确提出需要比较不同观点。"
+      },
+      "tested_skill": "主旨理解与同义替换",
+      "difficulty": 3,
+      "created_at": "2026-11-10T00:00:00Z"
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000008",
+      "article_id": "10000000-0000-4000-8000-000000000003",
+      "type": "translation",
+      "provenance": "original_simulation",
+      "stem": "Translate: Access to information should not be confused with a deeper understanding of it.",
+      "correct_answer": "获取信息不应与深入理解信息混为一谈。",
+      "explanation": "access to 表示获取；be confused with 表示与……混淆。",
+      "evidence": "However, access to information should not be confused with a deeper understanding of it.",
+      "difficulty": 3
+    }
+  ],
+  "writing_expressions": [
+    {
+      "id": "10000000-0000-4000-8000-000000000009",
+      "expression": "play a vital role in",
+      "meaning": "在……中发挥重要作用",
+      "topics": [
+        "科技与人工智能",
+        "教育与人才培养"
+      ],
+      "expression_type": "论述作用",
+      "context": "论述某种因素对社会、教育或个人发展的贡献。",
+      "original_sentence": "Digital technology can play a vital role in this process when it encourages reflection.",
+      "essay_sentence": "Critical thinking plays a vital role in preparing students for an increasingly complex world.",
+      "translation": "批判性思维在帮助学生应对日益复杂的世界方面发挥着重要作用。",
+      "alternatives": [
+        "make a significant contribution to",
+        "be essential to"
+      ],
+      "usage_notes": "in 后接名词或动名词；避免只写空泛的作用，宜补充具体机制。",
+      "source_article_ids": [
+        "10000000-0000-4000-8000-000000000003"
+      ],
+      "created_at": "2026-11-10T00:00:00Z"
+    }
+  ]
+}
