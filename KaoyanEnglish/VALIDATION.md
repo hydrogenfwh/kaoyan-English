@@ -57,4 +57,59 @@
 - 未连接 AI/付费 API，没有网络上传代码。
 - 测试不使用 App 正式数据库；模拟器 App 数据也位于项目内的独立设备沙盒。
 - 未修改目标文件夹外的其他项目；工作区 Git 状态仅新增 KaoyanEnglish/。
-- 未运行 git commit 或推送；源码可直接审阅。
+- 第一阶段未运行 git commit 或推送；源码可直接审阅。
+
+---
+
+# 2026-11-12 功能调整验证记录
+
+本阶段完成原文入口、首页入口与导入明细、词汇归并展示与同根词、导入报告逐项记录，并更新文档。
+
+## 环境事实
+
+- 本轮所在机器只有 Command Line Tools：`xcode-select -p` 为 `/Library/Developer/CommandLineTools`，不存在 `/Applications/Xcode.app`，`xcodebuild -version` 报错要求安装 Xcode。
+- 因此 `Support/test.sh` 在 `swift test` 阶段失败：`no such module 'XCTest'`。本轮**未**执行 XCTest，也**未**重新编译 iOS App。
+- 未安装任何第三方依赖，未联网下载包。
+
+## 实际执行的验证
+
+| 验证 | 实际结果 | 说明 |
+| --- | --- | --- |
+| `swift build`（KaoyanCore） | 通过 | 13 个核心源文件编译成功 |
+| 同模块临时 harness | **46 项检查全部通过**（`ALL CORE CHECKS PASSED`） | 用 `swiftc` 把 Models/Services/Utilities 与 `tmp/main.swift` 一起编译，链接系统 `-lsqlite3`，数据目录指向 `tmp/` |
+| `Support/test.sh` | 未通过（环境限制） | `no such module 'XCTest'`，非代码错误 |
+
+harness 通过 `swiftc -o tmp/verify-core $(find KaoyanEnglish/Models KaoyanEnglish/Services KaoyanEnglish/Utilities -name '*.swift') tmp/main.swift -lsqlite3` 编译，`KAOYAN_TEST_ROOT=tmp ./tmp/verify-core` 运行。`tmp/` 已被 `.gitignore` 忽略。
+
+## harness 覆盖内容
+
+1. 导入计数：4 个新词义、2 条同义不同语境、2 道题、1 条写作表达。
+2. 导入报告逐项明细：6 条词汇条目、2 条 `contextAdded`，并可从导入历史按 packageId 取回。
+3. 词汇归并：study/studies/studied 四条记录归入一个词条、两个词义；保留具体词形、两篇原文来源和四条例句。
+4. 同根词：reflect 与 reflection 通过显式 `word_family` 关联但不合并。
+5. 收藏：任意一条记录收藏后整个词条显示为收藏。
+6. 原文目录：只列 `kind=original`；空白主题显示“未分类”；分类筛选正确；仅出现在改编文上的主题不进入分类列表。
+7. 原文关联题目：同时包含直接题和改编文题目，重复题目去重；改编关系可从原文反查。
+8. 题库只列改编文；答题提交前答案与解析为空，持久化成功后显示，答题记录写入数据库。
+9. 旧导入报告 JSON 解码后 `items == nil`，详情页按“不可用”展示。
+10. 相同语境重复导入合并别名、不新增记录；同一词义不同语境新增独立记录并标记 `contextAdded`。
+11. 导出保留全部 7 条语境记录与 7 条例句。
+12. 备份恢复保留全部词汇记录、答题记录和 3 条导入历史。
+13. 删除单条词义记录后词条仍有 3 条记录，收藏状态保留。
+14. v1→v2 迁移：词汇、收藏、别名全部保留，`user_version=2`，旧 `vocabulary` 表作为归档保留。
+
+## 本阶段发现并修正的问题
+
+- 旧测试 `testDuplicateWordMergesMultipleSourcesAndPreservesLearning` 期望不同来源语境合并为一条记录，与新需求“同一释义来自多篇原文时保留各自来源及例句”冲突。已重写为 `testDuplicateWordKeepsSeparateContextsAndLearningState`，期望保留两条记录、同一词条同一词义、收藏保留、首条记录不被覆盖。第一阶段记录的“22 项”仍是对当时代码的真实结果，但第 8 项描述的行为已按新语义调整。
+- 新增导入明细相关测试 3 项（历史明细解码、outcome 区分、200 条上限截断），因环境限制未执行，仅由同模块 harness 覆盖了前两项的数据层行为。
+
+## 本轮未验证
+
+- 未编译 iOS App 与 SwiftUI 视图（原文页、词汇详情、导入详情、首页入口）；这些改动只做了静态审阅。
+- 未运行 XCTest、未启动模拟器、未做真机或 iOS 17 runtime 验收。
+- 未做无障碍、大字号、横屏与完整点按流程验证。
+- 备份恢复的 App 内交互入口仍未实现，与第一阶段限制相同。
+
+## 提交与推送
+
+本轮改动提交到 `main` 并推送到 `git@github.com:hydrogenfwh/kaoyan-English.git`；具体提交哈希与推送结果见最终回复及 `git log`。构建产物、`tmp/` harness 与临时数据库不纳入提交。

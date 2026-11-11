@@ -22,7 +22,7 @@ final class ImportTests: StoreTestCase {
         XCTAssertTrue(report.alreadyImported); XCTAssertEqual(report.vocabularyAdded, 0)
         XCTAssertEqual(try store.snapshot().history.count, 1); XCTAssertTrue(try store.snapshot().vocabulary.isEmpty)
     }
-    func testDuplicateWordMergesMultipleSourcesAndPreservesLearning() throws {
+    func testDuplicateWordKeepsSeparateContextsAndLearningState() throws {
         let p = fixture(); _ = try store.importPackage(p)
         try store.setFavorite(id: p.vocabulary[0].id, kind: .vocabulary, favorite: true)
         var second = p; second.packageId = UUID().uuidString.lowercased()
@@ -30,13 +30,19 @@ final class ImportTests: StoreTestCase {
         second.vocabulary[0].id = UUID().uuidString.lowercased()
         second.vocabulary[0].expression = "  FACILITATE  "
         second.vocabulary[0].sourceArticleIds = [second.articles[0].id]
-        second.vocabulary[0].phonetic = "must not overwrite"
+        second.vocabulary[0].phonetic = "second context only"
         second.questions = []; second.writingExpressions = []
         let report = try store.importPackage(second)
         XCTAssertEqual(report.duplicates, 1)
         let snapshot = try store.snapshot()
-        XCTAssertEqual(snapshot.vocabulary.count, 1); XCTAssertEqual(snapshot.vocabulary[0].sourceArticleIds.count, 2)
-        XCTAssertNil(snapshot.vocabulary[0].phonetic); XCTAssertTrue(snapshot.favoriteVocabulary.contains(p.vocabulary[0].id))
+        XCTAssertEqual(snapshot.vocabulary.count, 2, "Different source context must be retained as its own record.")
+        let entry = try XCTUnwrap(VocabularyGrouping.entries(snapshot.vocabulary).first)
+        XCTAssertEqual(entry.records.count, 2)
+        XCTAssertEqual(entry.senses.count, 1)
+        XCTAssertEqual(Set(entry.records.flatMap(\.sourceArticleIds)), Set([p.articles[0].id, second.articles[0].id]))
+        XCTAssertTrue(entry.isFavorite(snapshot.favoriteVocabulary))
+        XCTAssertNil(entry.records.first { $0.id == p.vocabulary[0].id }?.phonetic, "The first record is never overwritten.")
+        XCTAssertEqual(try store.vocabulary(id: second.vocabulary[0].id).phonetic, "second context only")
     }
     func testMalformedJSONMissingFieldAndInvalidReferencesDoNotWrite() throws {
         _ = try store.importPackage(fixture())
@@ -80,5 +86,56 @@ final class ImportTests: StoreTestCase {
         XCTAssertEqual(report.duplicates, 2)
         XCTAssertEqual(try store.snapshot().questions.count, 1)
         XCTAssertEqual(try store.snapshot().writing.count, 1)
+    }
+    func testImportReportStoresItemDetailsAndLegacyReportsDecodeWithoutItems() throws {
+        let p = fixture()
+        let report = try store.importPackage(p)
+        let items = try XCTUnwrap(report.items)
+        XCTAssertEqual(items.count, 4)
+        XCTAssertEqual(Set(items.map(\.kind)), Set([.article, .vocabulary, .question, .writing]))
+        XCTAssertEqual(items.first { $0.kind == .vocabulary }?.title, "facilitate")
+        XCTAssertEqual(items.first { $0.kind == .vocabulary }?.detail, "促进；使便利")
+        XCTAssertEqual(items.first { $0.kind == .vocabulary }?.outcome, .added)
+        XCTAssertEqual(try store.snapshot().history.first, report)
+        let legacy = """
+        {"package_id":"\(p.packageId)","imported_at":"2026-11-10T00:00:00Z","vocabulary_added":1,"questions_added":1,"writing_added":1,"duplicates":0,"failed":0,"already_imported":false}
+        """
+        let decoded = try JSONCoding.decoder().decode(ImportReport.self, from: Data(legacy.utf8))
+        XCTAssertNil(decoded.items)
+        XCTAssertNil(decoded.itemsTruncated)
+        XCTAssertEqual(decoded.vocabularyAdded, 1)
+    }
+    func testImportItemOutcomesDistinguishNewContextAndMergedDuplicate() throws {
+        let p = fixture(); _ = try store.importPackage(p)
+        var context = p; context.packageId = UUID().uuidString.lowercased()
+        context.articles = []; context.questions = []; context.writingExpressions = []
+        context.vocabulary[0].id = UUID().uuidString.lowercased()
+        context.vocabulary[0].originalSentence = "A different sentence."
+        let contextReport = try store.importPackage(context)
+        XCTAssertEqual(contextReport.items?.first?.outcome, .contextAdded)
+        XCTAssertEqual(contextReport.duplicates, 1)
+        var duplicate = p; duplicate.packageId = UUID().uuidString.lowercased()
+        duplicate.articles = []; duplicate.questions = []; duplicate.writingExpressions = []
+        duplicate.vocabulary[0].id = UUID().uuidString.lowercased()
+        let duplicateReport = try store.importPackage(duplicate)
+        XCTAssertEqual(duplicateReport.items?.first?.outcome, .merged)
+        XCTAssertEqual(duplicateReport.duplicates, 1)
+        XCTAssertEqual(try store.snapshot().vocabulary.count, 2)
+    }
+    func testImportItemListIsBoundedAndMarkedTruncated() throws {
+        var p = fixture()
+        let base = p.vocabulary[0]
+        p.vocabulary = (0..<205).map { index in
+            var value = base
+            value.id = UUID().uuidString.lowercased()
+            value.expression = "word\(index)"
+            value.meaning = "释义 \(index)"
+            return value
+        }
+        let report = try store.importPackage(p)
+        XCTAssertEqual(report.vocabularyAdded, 205)
+        XCTAssertEqual(report.items?.count, ImportReport.maximumItems)
+        XCTAssertEqual(report.itemsTruncated, true)
+        XCTAssertEqual(try store.snapshot().history.first?.itemsTruncated, true)
     }
 }

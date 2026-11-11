@@ -63,6 +63,20 @@ final class DictionaryRevisionTests: StoreTestCase {
         XCTAssertEqual(entry.records.count, 5)
     }
 
+    func testWhitespaceAndPartOfSpeechAliasesShareSenseButWordingDoesNot() throws {
+        let records = [word("study", meaning: " 学习 ", pos: "noun"),
+                       word("study", meaning: "学习", pos: "n"),
+                       word("study", meaning: "学习。", pos: "noun"),
+                       word("study", meaning: "学习", pos: "verb")]
+        let entry = try XCTUnwrap(VocabularyGrouping.entries(records).first)
+        XCTAssertEqual(entry.senses.count, 3)
+        XCTAssertEqual(entry.records.count, 4)
+        let exact = try XCTUnwrap(entry.senses.first {
+            $0.partOfSpeech == "名词" && VocabularyGrouping.normalizedMeaning($0.meaning) == "学习"
+        })
+        XCTAssertEqual(exact.records.count, 2)
+    }
+
     func testFiltersMatchOneContextButDoNotDiscardOtherMeaningsFromDetailEntry() throws {
         var first = word("study", meaning: "学习", pos: "verb")
         first.topics = ["教育与人才培养"]; first.difficulty = 2; first.englishDefinition = "to learn about a subject"

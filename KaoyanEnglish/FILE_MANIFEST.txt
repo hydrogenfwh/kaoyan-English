@@ -1,4 +1,4 @@
-项目根目录：/Users/hydrogen/Documents/ChatGPT/帖子整理/KaoyanEnglish
+项目根目录：/Users/bytedance/Desktop/kaoyan/kaoyan-English/KaoyanEnglish
 
 交付源码及文档（不含 Build/、tmp/ 生成产物）：
 .gitignore
@@ -7,8 +7,10 @@ KaoyanEnglish.xcodeproj/project.pbxproj
 KaoyanEnglish.xcodeproj/xcshareddata/xcschemes/KaoyanEnglish.xcscheme
 KaoyanEnglish/App/Info.plist
 KaoyanEnglish/App/KaoyanEnglishApp.swift
+KaoyanEnglish/Models/ArticleNavigation.swift
 KaoyanEnglish/Models/LearningModels.swift
 KaoyanEnglish/Models/QuestionSession.swift
+KaoyanEnglish/Models/VocabularyGrouping.swift
 KaoyanEnglish/Resources/learning-package.schema.json
 KaoyanEnglish/Resources/sample-package.json
 KaoyanEnglish/Services/Backup/BackupService.swift
@@ -21,13 +23,16 @@ KaoyanEnglish/Utilities/Serialization.swift
 KaoyanEnglish/ViewModels/LibraryViewModel.swift
 KaoyanEnglish/Views/Home/HomeView.swift
 KaoyanEnglish/Views/Import/ImportViews.swift
+KaoyanEnglish/Views/Originals/OriginalArticleViews.swift
 KaoyanEnglish/Views/Questions/QuestionViews.swift
 KaoyanEnglish/Views/SharedViews.swift
 KaoyanEnglish/Views/Vocabulary/VocabularyViews.swift
 KaoyanEnglish/Views/Writing/WritingViews.swift
+KaoyanEnglishTests/ArticleNavigationTests.swift
 KaoyanEnglishTests/BackupAndSessionTests.swift
 KaoyanEnglishTests/ContractTests.swift
 KaoyanEnglishTests/DatabaseTests.swift
+KaoyanEnglishTests/DictionaryRevisionTests.swift
 KaoyanEnglishTests/ImportTests.swift
 LearningMaterials/create_technology_package.py
 LearningMaterials/media-literacy-study-package.json
@@ -39,4 +44,4 @@ Support/generate_resources.py
 Support/test.sh
 VALIDATION.md
 
-共 37 个文件。
+共 42 个文件。

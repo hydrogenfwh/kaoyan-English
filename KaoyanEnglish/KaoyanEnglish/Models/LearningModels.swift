@@ -110,7 +110,38 @@ struct WritingExpression: Codable, Identifiable, Equatable {
     var createdAt: String? = nil
     var dedupKey: String { TextKey.pair(expression, meaning) }
 }
+struct ImportItem: Codable, Equatable, Identifiable {
+    enum Kind: String, Codable {
+        case source, article, vocabulary, question, writing
+        var label: String {
+            switch self {
+            case .source: return "来源"
+            case .article: return "文章"
+            case .vocabulary: return "词汇"
+            case .question: return "题目"
+            case .writing: return "写作表达"
+            }
+        }
+    }
+    enum Outcome: String, Codable {
+        case added, merged, contextAdded
+        var label: String {
+            switch self {
+            case .added: return "新增"
+            case .merged: return "合并"
+            case .contextAdded: return "新增语境记录"
+            }
+        }
+    }
+    var kind: Kind
+    var entityId: String
+    var title: String
+    var detail: String? = nil
+    var outcome: Outcome
+    var id: String { kind.rawValue + ":" + entityId }
+}
 struct ImportReport: Codable, Identifiable, Equatable {
+    static let maximumItems = 200
     var id: String { packageId }
     var packageId: String
     var importedAt: String
@@ -120,6 +151,9 @@ struct ImportReport: Codable, Identifiable, Equatable {
     var duplicates: Int
     var failed: Int = 0
     var alreadyImported: Bool = false
+    // New reports save a bounded item list. Older reports decode with nil and are shown as unavailable.
+    var items: [ImportItem]? = nil
+    var itemsTruncated: Bool? = nil
 }
 struct AnswerAttempt: Codable, Identifiable, Equatable {
     var id: String

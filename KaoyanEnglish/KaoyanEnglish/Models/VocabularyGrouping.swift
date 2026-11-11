@@ -32,8 +32,10 @@ struct VocabularySense: Identifiable {
     }
     static func key(meaning: String, partOfSpeech: String?) -> String {
         let pos = VocabularyGrouping.normalizedPartOfSpeech(partOfSpeech) ?? ""
-        // Keep case, punctuation and internal whitespace in meanings: only identical text combines.
-        return "\(pos.utf8.count):\(pos)\(meaning.utf8.count):\(meaning)"
+        // Only whitespace and compatibility differences collapse. Wording, case and
+        // punctuation differences remain separate senses until a human edits them.
+        let gloss = VocabularyGrouping.normalizedMeaning(meaning)
+        return "\(pos.utf8.count):\(pos)\(gloss.utf8.count):\(gloss)"
     }
 }
 
@@ -100,6 +102,10 @@ enum VocabularyGrouping {
         ["flexible", "flexibility", "inflexible"],
         ["rigid", "rigidity"], ["allege", "allegation"]
     ]
+    static func normalizedMeaning(_ value: String) -> String {
+        value.precomposedStringWithCompatibilityMapping
+            .split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
+    }
     static func normalizedPartOfSpeech(_ value: String?) -> String? {
         guard let value else { return nil }
         let normalized = TextKey.normalize(value)

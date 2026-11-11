@@ -9,6 +9,7 @@ struct ImportReportView: View {
                 Section {
                     Label("导入已完成", systemImage: "checkmark.circle.fill").font(.title2.bold()).foregroundStyle(.teal)
                     Text("本批次共 \(reports.count) 个资料包。重复内容保留原有学习记录，新增来源会合并。").foregroundStyle(.secondary)
+                    Text("逐项明细已保存，可在首页“最近导入”中查看。").font(.footnote).foregroundStyle(.secondary)
                 }
                 ForEach(Array(reports.enumerated()), id: \.offset) { _, report in
                     Section(report.alreadyImported ? "已导入过，安全跳过" : "新增资料") {
@@ -58,11 +59,31 @@ struct ImportRecordDetailView: View {
                 LabeledContent("失败数量", value: "\(report.failed)")
             }
             Section("资料包 ID") { Text(report.packageId).font(.caption.monospaced()).textSelection(.enabled) }
-            Section("条目明细") {
-                Text("不可用：此导入记录没有保存逐项清单、文件名或文章数量。")
-                    .foregroundStyle(.secondary).accessibilityIdentifier("importItemsUnavailable")
-                Text("上方数量来自当时保存的记录，不根据当前词库或文章反推。")
-                    .font(.footnote).foregroundStyle(.secondary)
+            Section(report.items.map { "条目明细（\($0.count)）" } ?? "条目明细") {
+                if let items = report.items {
+                    if items.isEmpty {
+                        Text("本次导入没有新增或合并的条目。").foregroundStyle(.secondary)
+                    }
+                    ForEach(items) { item in
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 8) {
+                                Text(item.kind.label).font(.caption.bold()).foregroundStyle(.teal)
+                                Text(item.outcome.label).font(.caption).foregroundStyle(.secondary)
+                            }
+                            Text(item.title).font(.subheadline)
+                            OptionalText(item.detail)
+                        }.padding(.vertical, 3)
+                    }
+                    if report.itemsTruncated == true {
+                        Text("仅保存前 \(ImportReport.maximumItems) 条明细；其余条目以汇总数量为准。")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                } else {
+                    Text("不可用：此导入记录没有保存逐项清单、文件名或文章数量。")
+                        .foregroundStyle(.secondary).accessibilityIdentifier("importItemsUnavailable")
+                    Text("上方数量来自当时保存的记录，不根据当前词库或文章反推。")
+                        .font(.footnote).foregroundStyle(.secondary)
+                }
             }
         }.navigationTitle("导入详情").navigationBarTitleDisplayMode(.inline)
     }

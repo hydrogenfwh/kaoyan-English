@@ -80,16 +80,28 @@ final class LibraryStore {
                     if faultAfterWrites == writes { throw LibraryError.database("测试注入的写入失败") }
                 }
                 var report = ImportReport(packageId: package.packageId, importedAt: Timestamp.now(), vocabularyAdded: 0, questionsAdded: 0, writingAdded: 0, duplicates: 0)
+                func recordItem(_ kind: ImportItem.Kind, _ entityId: String, _ title: String, _ detail: String?, _ outcome: ImportItem.Outcome) {
+                    if report.items == nil { report.items = [] }
+                    guard report.items!.count < ImportReport.maximumItems else {
+                        report.itemsTruncated = true
+                        return
+                    }
+                    report.items!.append(ImportItem(kind: kind, entityId: entityId, title: Self.itemTitle(title),
+                                                    detail: detail.map(Self.itemTitle), outcome: outcome))
+                }
                 for source in package.sources {
                     if !current.sources.contains(where: { $0.id == source.id }) {
                         try db.execute("INSERT INTO main.sources (id,payload) VALUES (?,?)", [source.id, try JSONCoding.string(source)])
+                        recordItem(.source, source.id, source.title, source.url, .added)
                         try checkpoint()
                     }
                 }
                 for var article in package.articles {
                     if !current.articles.contains(where: { $0.id == article.id }) {
                         article.createdAt = article.createdAt ?? report.importedAt
-                        try insertArticle(article); try checkpoint()
+                        try insertArticle(article)
+                        recordItem(.article, article.id, article.title, article.kind == .original ? "原始文章" : "改编文章", .added)
+                        try checkpoint()
                     }
                 }
                 for var v in package.vocabulary {
@@ -97,12 +109,14 @@ final class LibraryStore {
                     let saved = try records(Vocabulary.self, table: "vocab.records")
                     let sameSense = saved.contains {
                         VocabularyGrouping.lemma(for: $0) == VocabularyGrouping.lemma(for: v) &&
-                        $0.meaning == v.meaning && TextKey.normalize($0.partOfSpeech ?? "") == TextKey.normalize(v.partOfSpeech ?? "")
+                        VocabularyGrouping.normalizedMeaning($0.meaning) == VocabularyGrouping.normalizedMeaning(v.meaning) &&
+                        VocabularyGrouping.normalizedPartOfSpeech($0.partOfSpeech) == VocabularyGrouping.normalizedPartOfSpeech(v.partOfSpeech)
                     }
                     // Compare the complete authored context, not just spelling and gloss. In
                     // particular, never merge source IDs across records with different sentences.
                     if let identical = saved.first(where: { Self.sameVocabularyContext($0, v) }) {
                         try alias(incomingId, identical.id, table: "vocab.record_aliases")
+                        recordItem(.vocabulary, incomingId, identical.expression, identical.meaning, .merged)
                         report.duplicates += 1
                     } else {
                         // A stable incoming ID may already name an older context. Keep that
@@ -116,17 +130,22 @@ final class LibraryStore {
                         try writeVocabulary(v, insert: true)
                         try alias(v.id, v.id, table: "vocab.record_aliases")
                         try alias(incomingId, v.id, table: "vocab.record_aliases")
+                        recordItem(.vocabulary, incomingId, v.expression, v.meaning, sameSense ? .contextAdded : .added)
                         if sameSense { report.duplicates += 1 } else { report.vocabularyAdded += 1 }
                     }
                     try checkpoint()
                 }
                 for var q in package.questions {
                     if let canonical = try canonicalId(table: "main.questions", key: q.dedupKey) {
-                        try alias(q.id, canonical, table: "main.question_aliases"); report.duplicates += 1
+                        try alias(q.id, canonical, table: "main.question_aliases")
+                        recordItem(.question, q.id, q.stem, q.type.title, .merged)
+                        report.duplicates += 1
                     } else {
                         q.createdAt = q.createdAt ?? report.importedAt
                         try writeQuestion(q, insert: true)
-                        try alias(q.id, q.id, table: "main.question_aliases"); report.questionsAdded += 1
+                        try alias(q.id, q.id, table: "main.question_aliases")
+                        recordItem(.question, q.id, q.stem, q.type.title, .added)
+                        report.questionsAdded += 1
                     }
                     try checkpoint()
                 }
@@ -135,10 +154,14 @@ final class LibraryStore {
                         var old = try writing(id: canonical)
                         old.sourceArticleIds = Array(Set(old.sourceArticleIds + w.sourceArticleIds)).sorted()
                         old.topics = Array(Set((old.topics ?? []) + (w.topics ?? []))).sorted()
-                        try writeWriting(old, insert: false); report.duplicates += 1
+                        try writeWriting(old, insert: false)
+                        recordItem(.writing, w.id, w.expression, w.meaning, .merged)
+                        report.duplicates += 1
                     } else {
                         w.createdAt = w.createdAt ?? report.importedAt
-                        try writeWriting(w, insert: true); report.writingAdded += 1
+                        try writeWriting(w, insert: true)
+                        recordItem(.writing, w.id, w.expression, w.meaning, .added)
+                        report.writingAdded += 1
                     }
                     let canonical = try canonicalId(table: "writing.expressions", key: w.dedupKey)!
                     try alias(w.id, canonical, table: "writing.aliases"); try checkpoint()
@@ -147,6 +170,10 @@ final class LibraryStore {
                 return report
             }
         }
+    }
+    private static func itemTitle(_ text: String) -> String {
+        let value = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return value.count <= 120 ? value : String(value.prefix(120)) + "…"
     }
     private static func sameVocabularyContext(_ saved: Vocabulary, _ incoming: Vocabulary) -> Bool {
         var value = incoming
