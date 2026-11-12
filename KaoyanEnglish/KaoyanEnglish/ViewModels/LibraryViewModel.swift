@@ -14,7 +14,24 @@ actor LibraryWorker {
         #endif
         store = result; return result
     }
-    func snapshot() throws -> LibrarySnapshot { try opened().snapshot() }
+    func snapshot() throws -> LibrarySnapshot {
+        let store = try opened()
+        let state = try store.snapshot()
+        // Only a genuinely empty new library is populated automatically. Existing
+        // histories, edits and deleted records are never reconstructed on launch.
+        if state.history.isEmpty && state.articles.isEmpty && state.vocabulary.isEmpty && state.questions.isEmpty && state.writing.isEmpty {
+            _ = try importPrepared()
+            return try store.snapshot()
+        }
+        return state
+    }
+    func importPrepared() throws -> [ImportReport] {
+        let files = try ["prepared-media-literacy", "prepared-technology"].map { name -> Data in
+            guard let url = Bundle.main.url(forResource: name, withExtension: "json") else { throw LibraryError.missing("已整理文章资料") }
+            return try Data(contentsOf: url)
+        }
+        return try opened().importBatch(files)
+    }
     func importFiles(_ urls: [URL]) throws -> [ImportReport] {
         let files = try urls.map { url -> Data in
             let access = url.startAccessingSecurityScopedResource()
@@ -101,6 +118,9 @@ final class LibraryViewModel: ObservableObject {
     }
     func importSample() async {
         if await perform({ reports = try await worker.importSample() }) { showImportReport = true }
+    }
+    func importPrepared() async {
+        if await perform({ reports = try await worker.importPrepared() }) { showImportReport = true }
     }
     func favoriteVocabulary(ids: [String], value: Bool) async {
         await perform { try await worker.favoriteVocabulary(ids: ids, value: value) }

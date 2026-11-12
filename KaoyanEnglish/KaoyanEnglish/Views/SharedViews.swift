@@ -52,3 +52,30 @@ func optionalText(_ value: Binding<String?>) -> Binding<String> {
 func splitTags(_ text: String) -> [String] {
     Array(Set(text.components(separatedBy: CharacterSet(charactersIn: ",，\n")).map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty })).sorted()
 }
+
+/// Resolve both original IDs and adapted-article IDs to their original article.
+struct OriginalArticleLinks: View {
+    @EnvironmentObject private var model: LibraryViewModel
+    let ids: [String]
+    private var originals: [Article] {
+        let articles = model.snapshot.articles
+        let originals = ids.compactMap { id -> Article? in
+            guard let article = articles.first(where: { $0.id == id }) else { return nil }
+            if article.kind == .original { return article }
+            return articles.first { $0.id == article.originalArticleId && $0.kind == .original }
+        }
+        var seen = Set<String>()
+        return originals.filter { seen.insert($0.id).inserted }
+    }
+    var body: some View {
+        if !originals.isEmpty {
+            Section {
+                ForEach(originals) { article in
+                    NavigationLink { ArticleDetailView(id: article.id) } label: {
+                        Label(originals.count == 1 ? "查看原文" : "查看原文：\(article.title)", systemImage: "doc.text")
+                    }
+                }
+            }
+        }
+    }
+}

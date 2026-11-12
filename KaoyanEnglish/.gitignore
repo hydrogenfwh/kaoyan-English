@@ -1,4 +1,5 @@
 Build/
+Backups/
 .build/
 tmp/
 .swiftpm/

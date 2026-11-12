@@ -43,15 +43,9 @@ struct ArticleDetailView: View {
                     Section {
                         Text(article.title).font(.title2.bold()).textSelection(.enabled)
                         Text("\(article.kind == .adapted ? "改编文章" : "原始文章") · \(ArticleNavigation.category(of: article))").font(.caption).foregroundStyle(.teal)
-                        Text(article.body).font(.body).lineSpacing(7).textSelection(.enabled)
+                        ReadingTextView(text: article.body)
                     }
-                    if let original = article.originalArticleId { SourceArticleSection(ids: [original]) }
-                    if let source = model.snapshot.sources.first(where: { $0.id == article.sourceId }) {
-                        Section("文章来源") {
-                            Text(source.title); OptionalText(source.note)
-                            if let raw = source.url, let url = URL(string: raw) { Link("查看来源网页", destination: url) }
-                        }
-                    }
+                    if let original = article.originalArticleId { OriginalArticleLinks(ids: [original]) }
                     if article.kind == .original {
                         OriginalAssociatedSections(originalId: article.id)
                     } else {

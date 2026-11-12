@@ -49,6 +49,7 @@ struct HomeView: View {
                     Task { if await model.perform({ try await model.worker.check() }) { model.message = "三个数据库及跨库文章关联均通过完整性检查。" } }
                 } label: { Label("检查数据完整性", systemImage: "checkmark.shield") }
                 Button { confirmSample = true } label: { Label("导入内置示例", systemImage: "book.closed") }.accessibilityIdentifier("importSample")
+                Button { Task { await model.importPrepared() } } label: { Label("导入已整理的三篇文章", systemImage: "doc.text") }
                 NavigationLink { ImportHelpView() } label: { Label("资料格式与备份说明", systemImage: "questionmark.circle") }
             }.disabled(model.busy || !model.ready)
             Section { Text("资料默认只保存在本机。本应用不调用 AI、不读取 ChatGPT 聊天记录，也不自动上传数据。").font(.footnote).foregroundStyle(.secondary) }

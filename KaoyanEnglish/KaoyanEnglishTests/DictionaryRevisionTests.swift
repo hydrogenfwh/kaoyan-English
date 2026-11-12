@@ -37,7 +37,7 @@ final class DictionaryRevisionTests: StoreTestCase {
 
     func testKnownPluralsAndTensesNormalizeCaseAndWhitespace() {
         XCTAssertEqual(VocabularyGrouping.entries([word("dog"), word("DOGS")]).count, 1)
-        XCTAssertEqual(VocabularyGrouping.entries([word("work"), word("works"), word("worked"), word("working")]).count, 1)
+        XCTAssertEqual(VocabularyGrouping.entries([word("work", pos: "verb"), word("works", pos: "verb"), word("worked", pos: "verb"), word("working", pos: "verb")]).count, 1)
         XCTAssertEqual(VocabularyGrouping.entries([word(" PLAY   A ROLE "), word("play a role")]).count, 1)
     }
 

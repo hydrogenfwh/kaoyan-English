@@ -56,7 +56,7 @@ struct WritingDetailView: View {
                     DetailSection(title: "作文改写例句", text: value.essaySentence, secondary: value.translation)
                     DetailSection(title: "可替换表达", text: value.alternatives?.joined(separator: "\n"))
                     DetailSection(title: "使用注意事项", text: value.usageNotes)
-                    SourceArticleSection(ids: value.sourceArticleIds)
+                    OriginalArticleLinks(ids: value.sourceArticleIds)
                     Section { Button("删除表达", role: .destructive) { deleting = true } }
                 }.navigationTitle("表达详情").navigationBarTitleDisplayMode(.inline)
                     .toolbar {
